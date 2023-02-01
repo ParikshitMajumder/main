@@ -1,0 +1,126 @@
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% load cart_tag %}
+{% load static %}
+<body>
+
+    <!-- Example Code -->
+    <!--
+  <nav class="navbar bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="static/img/about.png" alt="Bootstrap">
+      </a>
+    </div>
+  </nav>-->
+
+
+
+    <!-- Card -->
+
+    <div class="card text-center">
+        <div class="card-header">
+            Home/Register
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Add your address</h5>
+            <p class="card-text">Currently only one default address is supported.</p>
+
+        </div>
+
+    </div>
+
+    {% for message in messages%}
+
+    <div class="alert alert-danger alert-dismissible fade show animate__animated animate__bounce animate__shakeX" role="alert">
+        <strong>{{message}} </strong> <p> Please correct it</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endfor %}
+
+
+    <!-- Form -->
+    <div class="container">
+      {% for message in messages%}
+
+      <div class="alert alert-danger alert-dismissible fade show animate__animated animate__bounce animate__shakeX" role="alert">
+          <strong>{{message}} </strong> <p> Please try again after sometime</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  
+      {% endfor %}
+        <form action="/accounts/address/add" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Address lIne 1</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address lIne 1"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Address lIne 2</label>
+                <input type="text" class="form-control" id="address2" name="address2" placeholder="Address lIne 2"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Landmark</label>
+                <input type="text" class="form-control" id="area" name="area" placeholder="Landmark"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">District</label>
+                <input type="text" class="form-control" id="district" name="district" placeholder="District"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">City</label>
+                <input type="text" class="form-control" id="City" name="City" placeholder="City"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">State</label>
+                <input type="text" class="form-control" id="State" name="State" placeholder="State"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Pin Code</label>
+                <input type="text" class="form-control" id="Pin_Code" name="Pin_Code" placeholder="Pin_Code"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Enter Phone</label>
+
+                <input type="text" class="form-control" id="exampleFormControlInput1" id="phone" name="phone"
+                    placeholder="your phone" required>
+
+
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" type="checkbox" value="checked" name="bill" id="bill">
+              <label class="form-check-label" for="flexCheckDefault">
+                Make this as my billing address
+              </label>
+            </div>
+            
+            <input type="text" name="user_id" id="user_id" value="{{user.id}}" hidden>
+            <input type="text" name="name" id="name" value="{{user.first_name}}{{user.last_name}}" hidden>
+            <button class="btn btn-success">Submit</button>
+    </div>
+
+    </form>
+
+
+
+
+
+    <!-- For Parts -->
+
+
+
+    <!-- End Example Code -->
+</body>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body animate__animated animate__bounce">
+        <h2>Your order details </h2>
+    </div>
+</div>
+
+<div class="container">
+    <h5> Order details </h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">amount</th>
+            <th scope="col">mode</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created on </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in order %}
+        <tr>
+            <th scope="row">{{i.user_name}}</th>
+            <td>{{i.amount}}</td>
+            <td>
+             {{i.mode}}
+            </td>
+            <td>{{i.ORDER_STATUS}}</td>
+            <td>{{i.created_at}}</td>
+            {% if i.ORDER_STATUS == "SHIPPED" %}
+            <td> Order cannot be cancelled </td>
+            {% elif i.ORDER_STATUS == "CANCELLED" %}
+            <td> Order has been cancelled  </td>
+            {% else %}
+            <td>
+                <form action="/accounts/order/cancel" method="post">
+                    {% csrf_token %}
+                    <input type="text" id="order_id" name="order_id" value="{{i.id}}" readonly hidden>
+                    <input type="text" id="email" name="email" value="{{user.email}}" readonly hidden>
+                    <button class="btn btn-danger">Cancel</button>
+                </form>
+            </td>
+            {% endif %}
+            
+            
+        </tr>
+        {% endfor %}
+   
+    </tbody>
+    
+</table>
+
+<a href="/"><button type="button" class="btn btn-success">Continue shopping </button></a>
+</div>
+{% endblock %}

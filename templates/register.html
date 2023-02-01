@@ -1,0 +1,100 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% load cart_tag %}
+{% load static %}
+<body>
+
+    <!-- Example Code -->
+    <!--
+  <nav class="navbar bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="static/img/about.png" alt="Bootstrap">
+      </a>
+    </div>
+  </nav>-->
+
+
+
+    <!-- Card -->
+
+    <div class="card text-center">
+        <div class="card-header">
+            Home/Register
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Sign Up with us</h5>
+            <p class="card-text">Please fill out the below form to register your account with us.</p>
+
+        </div>
+
+    </div>
+
+    {% for message in messages%}
+
+    <div class="alert alert-danger alert-dismissible fade show animate__animated animate__bounce animate__shakeX" role="alert">
+        <strong>{{message}} </strong> <p> Please correct it</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endfor %}
+
+
+    <!-- Form -->
+    <div class="container">
+        <form action="/accounts/register" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="Your First Name"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="Your Last Name"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Enter password</label>
+                <input type="password" class="form-control" id="pasword1" name="pasword1"
+                    placeholder="your password" required>
+                <label for="exampleFormControlTextarea1" class="form-label">Please Re-Enter password</label>
+                <input type="password" class="form-control" id="pasword2" name="pasword2"
+                    placeholder="Repeat your password" required>
+
+
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Enter Phone(optional)</label>
+
+                <input type="text" class="form-control" id="exampleFormControlInput1" id="phone" name="phone"
+                    placeholder="your phone">
+
+
+            </div>
+            <button class="btn btn-success">Submit</button>
+    </div>
+
+    </form>
+
+
+
+
+
+    <!-- For Parts -->
+
+
+
+    <!-- End Example Code -->
+</body>
+
+{% endblock %}
